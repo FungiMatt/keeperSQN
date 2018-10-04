@@ -5,6 +5,9 @@ const si = require('systeminformation');
 const bToGb = Math.pow(10, 9);
 
 let path = os.platform() === 'win32' ? 'c:' : '/';
+var iCPU = 0;
+var cpuArray = [];
+var linhaUso;
 
 function tudo(){
   si.mem(function(mem){
@@ -64,12 +67,20 @@ function tudo(){
     const usoCPU = ((cpuPerc*100).toFixed(0));
     const qtdCPU = osUtils.cpuCount()
 
+    cpuArray[iCPU] = usoCPU;
+    iCPU++;
+
+    if(iCPU==11){
+      iCPU=0;
+    }
+
     console.log('\nA máquina possui '+qtdCPU+' núcleos')
     console.log('\nUso de CPU (%): '+usoCPU);
 
     let jsonCPU = {
       cpu_num_nucleos: qtdCPU,
-      cpu_perc_uso: usoCPU,
+      cpu_perc_uso_atual: usoCPU,
+      cpu_perc_uso_linha_tempo: cpuArray.toString()
     };
 
     let dataCPU = JSON.stringify(jsonCPU, null, 2);

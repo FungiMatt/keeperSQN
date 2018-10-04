@@ -24,7 +24,7 @@ function tudo(){
     };
 
     let dataMem = JSON.stringify(jsonMem, null, 2);
-    fs.writeFileSync('memoria.json', dataMem);
+    fs.writeFileSync('json/memoria.json', dataMem);
 
 });
 
@@ -48,12 +48,15 @@ function tudo(){
       });
 
       console.log('\nDisco '+hdd)
-      console.log('Espaço total = '+espacoTotal+'GB');
-      console.log('Espaço em uso = '+espacoUso+'GB'+' ('+percUso+'%)');
-      console.log('Espaço disponível = '+espacoDisp+'GB'+' ('+percDisp+'%)');
-
-      let dataDisco = JSON.stringify(jsonArray, null, 2);
-      fs.writeFileSync('disco.json', dataDisco);
+      if(isNaN(espacoTotal)){
+        console.log('Informações de espaço indisponíveis');
+      } else{
+        console.log('Espaço total = '+espacoTotal+'GB');
+        console.log('Espaço em uso = '+espacoUso+'GB'+' ('+percUso+'%)');
+        console.log('Espaço disponível = '+espacoDisp+'GB'+' ('+percDisp+'%)');
+      }
+      let dataDisco = JSON.stringify(jsonArray, null, 2     );
+      fs.writeFileSync('json/disco.json', dataDisco);
     }
   });
 
@@ -70,7 +73,7 @@ function tudo(){
     };
 
     let dataCPU = JSON.stringify(jsonCPU, null, 2);
-    fs.writeFileSync('cpu.json', dataCPU);
+    fs.writeFileSync('json/cpu.json', dataCPU);
   });
 };
 

@@ -5,6 +5,9 @@ const si = require('systeminformation');
 const bToGb = Math.pow(10, 9);
 
 let path = os.platform() === 'win32' ? 'c:' : '/';
+var iCPU = 0;
+var cpuArray = [];
+var linhaUso;
 
 function tudo(){
   si.mem(function(mem){
@@ -24,7 +27,7 @@ function tudo(){
     };
 
     let dataMem = JSON.stringify(jsonMem, null, 2);
-    fs.writeFileSync('memoria.json', dataMem);
+    fs.writeFileSync('json/memoria.json', dataMem);
 
 });
 
@@ -48,12 +51,15 @@ function tudo(){
       });
 
       console.log('\nDisco '+hdd)
-      console.log('Espaço total = '+espacoTotal+'GB');
-      console.log('Espaço em uso = '+espacoUso+'GB'+' ('+percUso+'%)');
-      console.log('Espaço disponível = '+espacoDisp+'GB'+' ('+percDisp+'%)');
-
-      let dataDisco = JSON.stringify(jsonArray, null, 2);
-      fs.writeFileSync('disco.json', dataDisco);
+      if(isNaN(espacoTotal)){
+        console.log('Informações de espaço indisponíveis');
+      } else{
+        console.log('Espaço total = '+espacoTotal+'GB');
+        console.log('Espaço em uso = '+espacoUso+'GB'+' ('+percUso+'%)');
+        console.log('Espaço disponível = '+espacoDisp+'GB'+' ('+percDisp+'%)');
+      }
+      let dataDisco = JSON.stringify(jsonArray, null, 2     );
+      fs.writeFileSync('json/disco.json', dataDisco);
     }
   });
 
@@ -61,16 +67,24 @@ function tudo(){
     const usoCPU = ((cpuPerc*100).toFixed(0));
     const qtdCPU = osUtils.cpuCount()
 
+    cpuArray[iCPU] = usoCPU;
+    iCPU++;
+
+    if(iCPU==11){
+      iCPU=0;
+    }
+
     console.log('\nA máquina possui '+qtdCPU+' núcleos')
     console.log('\nUso de CPU (%): '+usoCPU);
 
     let jsonCPU = {
       cpu_num_nucleos: qtdCPU,
-      cpu_perc_uso: usoCPU,
+      cpu_perc_uso_atual: usoCPU,
+      cpu_perc_uso_linha_tempo: cpuArray.toString()
     };
 
     let dataCPU = JSON.stringify(jsonCPU, null, 2);
-    fs.writeFileSync('cpu.json', dataCPU);
+    fs.writeFileSync('json/cpu.json', dataCPU);
   });
 };
 

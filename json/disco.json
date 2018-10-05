@@ -1,0 +1,20 @@
+[
+  {
+    "disco_unidade": "C:",
+    "disco_espaco_total": "107",
+    "disco_espaco_usado": "94",
+    "disco_espaco_disponivel": 13
+  },
+  {
+    "disco_unidade": "D:",
+    "disco_espaco_total": "393",
+    "disco_espaco_usado": "279",
+    "disco_espaco_disponivel": 114
+  },
+  {
+    "disco_unidade": "E:",
+    "disco_espaco_total": "NaN",
+    "disco_espaco_usado": "NaN",
+    "disco_espaco_disponivel": null
+  }
+]

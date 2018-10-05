@@ -1,5 +1,7 @@
 {
   "cpu_num_nucleos": 4,
-  "cpu_perc_uso_atual": "37",
-  "cpu_perc_uso_linha_tempo": "18,26,37,42,15,14,11,14,10,18,15"
+  "cpu_perc_uso_atual": "28",
+  "cpu_perc_uso_linha_tempo": [
+    "28"
+  ]
 }

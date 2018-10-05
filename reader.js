@@ -2,7 +2,13 @@ const fs = require('fs');
 const os = require('os');
 const osUtils = require('os-utils');
 const si = require('systeminformation');
+var mkdirp = require('mkdirp');
+
 const bToGb = Math.pow(10, 9);
+
+mkdirp(__dirname+'json', function (err) {
+    if (err) console.error(err)
+});
 
 let path = os.platform() === 'win32' ? 'c:' : '/';
 
@@ -81,7 +87,7 @@ function tudo(){
     let jsonCPU = {
       cpu_num_nucleos: qtdCPU,
       cpu_perc_uso_atual: usoCPU,
-      cpu_perc_uso_linha_tempo: cpuArray.toString()
+      cpu_perc_uso_linha_tempo: [cpuArray.toString()]
     };
 
     let dataCPU = JSON.stringify(jsonCPU, null, 2);

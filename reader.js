@@ -5,6 +5,7 @@ const si = require('systeminformation');
 const bToGb = Math.pow(10, 9);
 
 let path = os.platform() === 'win32' ? 'c:' : '/';
+
 var iCPU = 0;
 var cpuArray = [];
 var linhaUso;
@@ -29,7 +30,7 @@ function tudo(){
     let dataMem = JSON.stringify(jsonMem, null, 2);
     fs.writeFileSync('json/memoria.json', dataMem);
 
-});
+  });
 
   si.fsSize(function(disco){
     var i;
